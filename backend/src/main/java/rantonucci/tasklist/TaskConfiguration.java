@@ -17,10 +17,31 @@ public class TaskConfiguration extends Configuration {
 	@NotNull
 	@JsonProperty
 	private DataSourceFactory database = new DataSourceFactory();
+	
+    /**
+     * If the webapp is server by a separate server, the backend needs to explicitly
+     * allow CORS requests from that server.  Must match the referrer URL (e.g. https://violation.dci.net or http://localhost:8000).
+     */
+    private String remoteWebServer;
+    
+
     
     @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory(){
     	return database;
     }
+    
+    @JsonProperty
+    public String getRemoteWebServer() {
+    	// Return the default value if no value is provided.
+    	return remoteWebServer;
+    }
+    
+    @JsonProperty
+    public void setRemoteWebServer(String url) {
+    	this.remoteWebServer = url;
+    }
+
+
 }
 

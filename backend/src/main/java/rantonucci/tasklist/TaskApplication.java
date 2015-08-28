@@ -1,5 +1,7 @@
 package rantonucci.tasklist;
 
+import rantonucci.tasklist.resources.CorsResponseFilter;
+
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -48,6 +50,9 @@ public class TaskApplication extends Application<TaskConfiguration> {
     @Override
     public void run(TaskConfiguration configuration,
                     Environment environment) {
+    	
+        environment.jersey().register(new CorsResponseFilter(configuration.getRemoteWebServer()));
+
     	final TaskDao taskDao = new TaskDao(hibernate.getSessionFactory());
         environment.jersey().register(new TaskResource(taskDao));
 
