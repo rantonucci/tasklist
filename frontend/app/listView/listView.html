@@ -7,7 +7,7 @@
 		<th>x</th>
 	</tr>
 	<tr ng-repeat="task in taskList">
-		<td>_</td>
+		<td><input type="checkbox" ng-model="task.completed" ng-change="taskChecked(task)"></td>
 		<td>{{task.description}}</td>
 		<td> </td>
 	</tr>

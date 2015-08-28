@@ -110,8 +110,9 @@ public class TaskResource {
     	if (existingTask == null) {
     		throw new WebApplicationException("Unknown task '"+ newTask.getId() + "'", Response.Status.NOT_FOUND);
     	}
-    	
-    	newTask = dao.saveTask(newTask);
+
+    	existingTask.copy(newTask);
+    	newTask = dao.saveTask(existingTask);
     	
     	// Good REST practice to return in the response a URL to view the newly created object 
     	URI location = UriBuilder.fromResource(TaskResource.class).path(TaskResource.class, "getTask").build(newTask.getId());

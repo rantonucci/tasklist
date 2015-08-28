@@ -49,4 +49,19 @@ angular.module('myApp.listView', ['ngRoute'])
 		}
     };
 
+       	$scope.taskChecked = function(task) {
+
+       		// Persist the status change
+	   		// TODO: This should be moved down into a TaskList service
+			$http({
+		        url: 'http://localhost:8080/task',
+		        method: "PUT",
+		        data: JSON.stringify(task)
+		    }).then(function(data) {
+		   	}, function(response) {
+	   			alert("Error encountered talking with the server");
+		   	});	
+	   };
+
+
 }]);

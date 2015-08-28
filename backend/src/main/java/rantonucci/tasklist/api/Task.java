@@ -51,4 +51,13 @@ public class Task {
 		this.completed = completed;
 	}
 	
+	/**
+	 * Copy all information (besides the id) from the other task to this task.
+	 * @param other
+	 */
+	public void copy(Task other) {
+		description = other.description;
+		completed = other.completed;
+	}
+	
 }
