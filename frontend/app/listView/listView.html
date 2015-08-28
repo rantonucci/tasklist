@@ -1,4 +1,4 @@
-<p>Todo List</p>
+<H1>Todo List</H1>
 
 <table id="taskList">
 	<tr>
@@ -9,7 +9,7 @@
 	<tr ng-repeat="task in taskList">
 		<td><input type="checkbox" ng-model="task.completed" ng-change="taskChecked(task)"></td>
 		<td>{{task.description}}</td>
-		<td> </td>
+		<td><a href="" ng-click="deleteTask($index, task)">Delete</a></td>
 	</tr>
 	<tr>
 		<td/>
@@ -23,4 +23,3 @@
 	</tr>
 </table>
 
-<p>{{result}}</p>

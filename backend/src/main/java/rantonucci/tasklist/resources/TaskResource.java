@@ -129,6 +129,7 @@ public class TaskResource {
     @DELETE
     @Timed
     @UnitOfWork
+    @Path("{id}")
     public Response deleteTask(@PathParam("id") int id) {
     	Task existingTask = dao.getTask(id);
     	if (existingTask != null) {
