@@ -13,14 +13,39 @@ angular.module('myApp.listView', ['ngRoute'])
 
 .controller('ListViewCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.result = 'Fetching data...';
-	var authString = btoa('tom' + ':' + 'password');
+
+	// TODO: This should be moved down into a TaskList service
 	$http({
         url: 'http://localhost:8080/task',
         method: "GET"
-        //data: JSON.stringify(requestData)
     }).then(function(data) {
-     	$scope.result = data.data;
+    	$scope.result = "SUCCESS";
+     	$scope.taskList = data.data;
    	}, function(response) {
-   		$scope.result = "ERROR";
+   		alert("Error encountered talking with the server");
    	});	
+
+   	$scope.newTaskEntered = function() {
+
+   		if ($scope.newTaskDesc.trim().length > 0) {
+	   		// TODO: This should be moved down into a TaskList service
+	   		var newTask = {
+	   			description: $scope.newTaskDesc,
+	   			completed: false
+	   		}
+	   		$scope.newTaskDesc = "";
+			$http({
+		        url: 'http://localhost:8080/task',
+		        method: "POST",
+		        data: JSON.stringify(newTask)
+		    }).then(function(data) {
+		    	// TODO: Get the id of the new task
+	    		$scope.taskList.push(newTask);	
+	    		$scope.result = "Added.  New count = " + $scope.taskList.length;
+		   	}, function(response) {
+	   			alert("Error encountered talking with the server");
+		   	});	
+		}
+    };
+
 }]);

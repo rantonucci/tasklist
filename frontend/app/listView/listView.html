@@ -1,15 +1,25 @@
 <p>Todo List</p>
 
-<table>
+<table id="taskList">
 	<tr>
 		<th>Done</th>
 		<th>Task</th>
 		<th>x</th>
 	</tr>
-	<tr>
+	<tr ng-repeat="task in taskList">
 		<td>_</td>
-		<td>Write report</td>
+		<td>{{task.description}}</td>
 		<td> </td>
+	</tr>
+	<tr>
+		<td/>
+		<td>
+			<form ng-submit="newTaskEntered()">
+				<input type="text" placeholder="Enter a new task" ng-model="newTaskDesc" 
+					ng-keyup="$event.keyCode == 13 && newTaskEntered()"/>
+			</form>
+		</td>
+		<td></td>
 	</tr>
 </table>
 
