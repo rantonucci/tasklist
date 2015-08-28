@@ -5,6 +5,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import rantonucci.tasklist.api.Task;
 import rantonucci.tasklist.command.BootstrapCommand;
+import rantonucci.tasklist.db.TaskDao;
+import rantonucci.tasklist.resources.TaskResource;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 
@@ -42,5 +44,9 @@ public class TaskApplication extends Application<TaskConfiguration> {
     @Override
     public void run(TaskConfiguration configuration,
                     Environment environment) {
+    	final TaskDao taskDao = new TaskDao(hibernate.getSessionFactory());
+        environment.jersey().register(new TaskResource(taskDao));
+
+
     }
 }

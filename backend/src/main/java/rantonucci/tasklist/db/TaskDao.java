@@ -33,7 +33,7 @@ public class TaskDao extends AbstractDAO<Task>  {
 	 * @return
 	 */
 	public List<Task> getAllTasks(){
-		Query query = currentSession().createQuery("from Company");
+		Query query = currentSession().createQuery("from Task");
 		return list(query);
 	}
 	
@@ -44,5 +44,14 @@ public class TaskDao extends AbstractDAO<Task>  {
 	 */
 	public Task saveTask(Task task) throws HibernateException {
 		return persist(task);
+	}
+	
+	/**
+	 * Delete a task
+	 * @param task the task to delete
+	 * @throws HibernateException if there was an error
+	 */
+	public void deleteTask(Task task) throws HibernateException {
+		currentSession().delete(task); 
 	}
 }
