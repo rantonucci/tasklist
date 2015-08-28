@@ -1,1 +1,21 @@
 
+database:
+  # the name of your JDBC driver
+  driverClass: org.hsqldb.jdbc.JDBCDriver
+
+  # the username
+  user: sa
+
+  # the password
+  password: sa
+
+  # the JDBC URL
+  url: jdbc:hsqldb:file:database/db.hsql;shutdown=true;hsqldb.write_delay=false;
+
+  validationQuery: SELECT * FROM INFORMATION_SCHEMA.SYSTEM_TABLES
+
+  properties:
+    # Use the HSQL dialect
+    hibernate.dialect: org.hibernate.dialect.HSQLDialect
+    # Auto create or update the tables
+    hibernate.hbm2ddl.auto: validate
