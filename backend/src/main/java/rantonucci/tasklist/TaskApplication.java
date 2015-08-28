@@ -1,6 +1,7 @@
 package rantonucci.tasklist;
 
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import rantonucci.tasklist.api.Task;
@@ -30,6 +31,9 @@ public class TaskApplication extends Application<TaskConfiguration> {
     	bootstrap.addBundle(hibernate);
     	// Add our bootstrap command
     	bootstrap.addCommand(new BootstrapCommand());
+    	
+    	// Serve up assets from the assets directory
+    	  bootstrap.addBundle(new AssetsBundle("/assets", "/assets", "index.html"));
     }
     
     // Hibernate connection bundle
