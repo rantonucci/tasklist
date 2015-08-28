@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 
 import com.codahale.metrics.annotation.Timed;
@@ -88,7 +89,7 @@ public class TaskResource {
     	
     	// Good REST practice to return in the response a URL to view the newly created object 
     	URI location = UriBuilder.fromResource(TaskResource.class).path(TaskResource.class, "getTask").build(newTask.getId());
-    	return Response.created(location).build();
+    	return Response.created(location).status(Status.OK).entity(newTask).build();
     }    
     
     /**

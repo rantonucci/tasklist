@@ -28,6 +28,7 @@ angular.module('myApp.listView', ['ngRoute'])
    	$scope.newTaskEntered = function() {
 
    		if ($scope.newTaskDesc.trim().length > 0) {
+
 	   		// TODO: This should be moved down into a TaskList service
 	   		var newTask = {
 	   			description: $scope.newTaskDesc,
@@ -39,9 +40,9 @@ angular.module('myApp.listView', ['ngRoute'])
 		        method: "POST",
 		        data: JSON.stringify(newTask)
 		    }).then(function(data) {
-		    	// TODO: Get the id of the new task
+		    	newTask.id = data.data.id;
 	    		$scope.taskList.push(newTask);	
-	    		$scope.result = "Added.  New count = " + $scope.taskList.length;
+	    		$scope.result = "Added task " + newTask.id + ".  New count = " + $scope.taskList.length;
 		   	}, function(response) {
 	   			alert("Error encountered talking with the server");
 		   	});	
